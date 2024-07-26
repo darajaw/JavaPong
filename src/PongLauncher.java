@@ -13,6 +13,12 @@ public class PongLauncher {
        //the size of the game will be 480x640, the size of the JFrame needs to be slightly larger
        f.setSize(650,495);
 
+       //new PongGame instance
+       PongGame game = new PongGame();
+
+       //add the game to the JFrame
+       f.add(game);
+
        //show the window
        f.setVisible(true);
     }
