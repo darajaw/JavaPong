@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PongLauncher {
 
@@ -21,5 +23,20 @@ public class PongLauncher {
 
        //show the window
        f.setVisible(true);
+
+       //new Timer for refreshing frame by frame
+       //16 millisecond delay = ~60fps
+       Timer timer = new Timer(16, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            //repaint the screen each frame
+            game.repaint();
+
+        }
+    });
+
+    //start the timer after it's been created
+    timer.start();
     }
 }
