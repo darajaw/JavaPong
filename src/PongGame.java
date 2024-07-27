@@ -29,6 +29,18 @@ public class PongGame extends JPanel {
 
     }
 
+    
+    //Called once per frame to handle essential game operations
+     public void gameLogic(){
+
+        //move the ball each frame
+        gameBall.moveBall();
+
+        //edge check/bounce
+        gameBall.borderBounce(0, WINDOW_HEIGHT);
+
+}
+
    
 
 }

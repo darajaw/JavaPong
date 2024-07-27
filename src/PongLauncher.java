@@ -30,6 +30,9 @@ public class PongLauncher {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            //game logic
+            game.gameLogic();
+
             //repaint the screen each frame
             game.repaint();
 
