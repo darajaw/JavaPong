@@ -4,6 +4,7 @@ import java.awt.*;
 public class PongGame extends JPanel {
 
     private Ball gameBall;//pong ball declared
+    private Paddle userPaddle, pcPaddle;//pong paddles declared
 
     //Pong screen is 640X480 within the window
     static final int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 480;
@@ -12,8 +13,10 @@ public class PongGame extends JPanel {
     //method for constructing the game
     public PongGame(){
 
-    //new instance of the ball
+    //ball and paddle instances
     gameBall = new Ball(300, 200, 3, 3, 3, Color.PINK, 10);
+    userPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
+    pcPaddle = new Paddle(610, 200, 75, 3, Color.RED);
 
     }
     
@@ -26,6 +29,10 @@ public class PongGame extends JPanel {
 
         //draw the ball on the screen
         gameBall.paint(g);
+
+        //draw the paddles
+        userPaddle.paint(g);
+        pcPaddle.paint(g);
 
     }
 

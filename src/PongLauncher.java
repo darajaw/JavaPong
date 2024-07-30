@@ -12,7 +12,7 @@ public class PongLauncher {
        //exit program when window is closed
        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-       //the size of the game will be 480x640, the size of the JFrame needs to be slightly larger
+       //the size of the game is 480x640, the size of the JFrame needs to be slightly larger
        f.setSize(650,495);
 
        //new PongGame instance
