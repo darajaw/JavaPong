@@ -39,5 +39,20 @@ public class Paddle {
         //find the location of the center of the paddle
         //x,y of paddle is the top left corner
         int centerY = y + height / 2;
+
+        //determine if we need to move more than the speed away from where we are now
+        //checks if the paddle is off center from the target but within the speed parameters
+        if(Math.abs(centerY - moveToY) > speed){
+            //if the center of the paddle is too far down
+            if(centerY > moveToY){
+                //move the paddle up by the speed
+                y -= speed;
+            }
+            //if the center of the paddle is too far up
+            if(centerY < moveToY){
+                //move the paddle down by speed
+                y += speed;
+            }
+        }
     }
 }
