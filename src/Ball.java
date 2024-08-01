@@ -5,6 +5,7 @@ public class Ball {
 	//x & y are coordinates, cx & cy are changes in x & y per frame
     private int x, y, cx, cy, speed, size;
     private Color color;
+    static final int MAX_SPEED = 7;
 
 	//ball constructor
     public Ball(int x, int y, int cx, int cy, int speed, Color color, int size) {
@@ -117,16 +118,6 @@ public class Ball {
         else if(y < top){
             reverseY();
         }
-
-        //if x value is at left or right side
-        //hard-coded values, we will delete this section later
-        if(x < 0){
-            reverseX();
-        }
-        else if(x > (640 - size)){
-            reverseX();
-        }
-
     }
     //Reverse's the ball's change in x value
     public void reverseX(){
@@ -136,5 +127,17 @@ public class Ball {
     // Reverse's the ball's change in y value
     public void reverseY(){
         cy *= -1;
+    }
+
+    public void increaseSpeed(){
+        //make sure current speed is less than max speed before incrementing
+        if(speed < MAX_SPEED){
+            //increase the speed by one
+            speed ++;
+
+            //update ball speed in either direction
+            cx = speed * (cx < 0 ? -1 : 1);
+            cy = speed * (cx < 0 ? -1 : 1);
+        }
     }
 }

@@ -30,6 +30,11 @@ public class Paddle {
 
         //paint the rectangle for the paddle
         g.setColor(color);
+
+        //check if paddle is outside the border and correct it
+        borderCheck();
+
+        //draw the paddle 
         g.drawRect(x, y, PADDLE_WIDTH, height);
     }
 
@@ -54,5 +59,31 @@ public class Paddle {
                 y += speed;
             }
         }
+    }
+
+    public boolean checkCollision(Ball b){
+
+        int rightX = x + PADDLE_WIDTH;
+        int bottomY = y + height;
+    
+        //check if the Ball is between the x values of the paddle
+        if(b.getX() > (x - b.getSize()) && b.getX() < rightX){
+            //check if Ball is between the y values of the paddle
+            if(b.getY() > y && b.getY() < bottomY){
+                //if we get here, we know the ball and the paddle have collided
+                return true;
+            }
+        }
+    
+        //if we get here, one of the checks failed, and the ball has not collided
+        return false;
+    
+    }
+
+    private void borderCheck(){
+        
+        //keep paddle from leaving the window
+        if (y <= 0){ this.y = 0;}
+        if (y + height >= PongGame.WINDOW_HEIGHT){this.y = PongGame.WINDOW_HEIGHT - height;}
     }
 }
