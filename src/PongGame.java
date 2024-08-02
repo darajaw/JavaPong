@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+
 public class PongGame extends JPanel implements MouseMotionListener {
 
     private Ball gameBall;//pong ball declared
@@ -71,7 +72,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
 
         //move PC paddle towards the ball y position
         pcPaddle.moveTowards(gameBall.getY());
-
+        
         //check if ball collides with either paddle
         if(pcPaddle.checkCollision(gameBall) || userPaddle.checkCollision(gameBall)){
             //reverse ball if they collide
@@ -95,7 +96,9 @@ public class PongGame extends JPanel implements MouseMotionListener {
         }
 
         //every fifth bounce increase ball speed
-        if (bounceCount >= 5 && bounceCount%5==0){
+        if (bounceCount == 5){
+            //reset counter
+            bounceCount = 0;
             gameBall.increaseSpeed();
         }
 }
@@ -104,7 +107,6 @@ public class PongGame extends JPanel implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         userMouseY = e.getY();
-
     }
 
     //mouseMoved overrides mouseDragged if mouse is moved without click

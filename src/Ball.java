@@ -138,6 +138,7 @@ public class Ball {
             //update ball speed in either direction
             cx = speed * (cx < 0 ? -1 : 1);
             cy = speed * (cx < 0 ? -1 : 1);
+            System.out.print("speed is " + speed);
         }
     }
 }
