@@ -23,7 +23,38 @@ public class Paddle {
         this.height = height;
         this.speed = speed;
         this.color = color;
+    }  
+
+    
+    public int getX() {
+        return x;
     }
+
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+
+    public int getY() {
+        return y;
+    }
+
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+
+    public int getSpeed() {
+        return speed;
+    }
+
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
 
     //Draw rectangle on screen
     public void paint(Graphics g){
@@ -95,6 +126,6 @@ public class Paddle {
         
         //keep paddle from leaving the window
         if (y <= 0){ this.y = 0;}
-        if (y + height >= PongGame.WINDOW_HEIGHT){this.y = PongGame.WINDOW_HEIGHT - height;}
+        if (y + height >= PongGame.PANEL_HEIGHT){this.y = PongGame.PANEL_HEIGHT - height;}
     }
 }

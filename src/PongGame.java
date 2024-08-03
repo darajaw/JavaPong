@@ -11,7 +11,7 @@ public class PongGame extends JPanel implements KeyListener{
     private Paddle userPaddle, pcPaddle;//pong paddles declared
 
     //Game panel is 640 X 480 within the frame
-    private static final int PANEL_WIDTH = 640, PANEL_HEIGHT = 480;
+    static final int PANEL_WIDTH = 640, PANEL_HEIGHT = 480;
 
     //scores for players
     int userScore = 0; 
@@ -94,8 +94,14 @@ public class PongGame extends JPanel implements KeyListener{
         
         //check if ball collides with either paddle
         if(pcPaddle.checkCollision(gameBall) || userPaddle.checkCollision(gameBall)){
-            //reverse ball if they collide
+           
+            //reverse ball direction if they collision detected
             gameBall.reverseX();
+
+            //nudge ball in correct direction to avoid paddle collision bug
+            //if ball cx is positive (moving right) move it just outside the pcPaddle
+            //if ball cx is negative (moving leftt) move it just outside the userPaddle
+            gameBall.setX(gameBall.getCx() > 0 ? (pcPaddle.getX() + Paddle.PADDLE_WIDTH + 1) : (userPaddle.getX() - 10));
             
             //count bounces
             bounceCount++;
