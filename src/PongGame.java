@@ -4,8 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class PongGame extends JPanel{
-
+public class PongGame extends JPanel implements KeyListener{
+    
+    
     private Ball gameBall;//pong ball declared
     private Paddle userPaddle, pcPaddle;//pong paddles declared
 
@@ -19,19 +20,25 @@ public class PongGame extends JPanel{
     //count of ball bounces
     int bounceCount;
 
-    
+    //0 or WINDOW_HEIGHT for paddle movement
+    int paddleDirection;
 
-    
+    //Constants set to keycode for up and down arrows
+    public static final int VK_UP = 38;
+    public static final int VK_DOWN = 40;
 
     //game constructor
     public PongGame(){
 
-        //ball and paddle instances
-        gameBall = new Ball(300, 200, 3, 3, 3, Color.PINK, 10);
-        pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
-        userPaddle = new Paddle(610, 200, 75, 3, Color.RED);
+        //Listen for key presses 
+        addKeyListener(this);
+        //focus key input on this method
+        setFocusable(true);
 
-        
+        //ball and paddle instances
+        gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 10);
+        pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
+        userPaddle = new Paddle(610, 200, 75, 3, Color.RED);   
     }
     
     //Updates and draws all the graphics on the screen     
@@ -57,7 +64,7 @@ public class PongGame extends JPanel{
 
     
     //Called once per frame to handle essential game operations
-    public void gameLogic(int paddleDirection){
+    public void gameLogic(){
         
 
         //move the ball each frame
@@ -121,10 +128,36 @@ public class PongGame extends JPanel{
         //reset game
         gameBall.setX(300);
         gameBall.setY(200);
-        gameBall.setCx(3);
+        gameBall.setCx(-3);
         gameBall.setCy(3);
         gameBall.setSpeed(3);
         bounceCount = 0;
     }
+
+    
+    @Override
+        public void keyPressed(KeyEvent e){
+
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    paddleDirection = 0;
+                    break;
+            
+                case KeyEvent.VK_DOWN:
+                    paddleDirection = 480;
+                    break;
+            }
+
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            System.out.print(e.getKeyCode());
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            
+        }
 
 }
