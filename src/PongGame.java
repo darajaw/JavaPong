@@ -74,7 +74,7 @@ public class PongGame extends JPanel implements KeyListener{
         gameBall.borderBounce(0, WINDOW_HEIGHT);
 
         //move user paddle towards where the mouse is
-        userPaddle.moveTowards(paddleDirection);
+        userPaddle.moveTowards();
 
         //move PC paddle towards the ball y position
         pcPaddle.moveTowards(gameBall.getY());
@@ -140,11 +140,11 @@ public class PongGame extends JPanel implements KeyListener{
 
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                    paddleDirection = 0;
+                userPaddle.moveTowards(0);
                     break;
             
                 case KeyEvent.VK_DOWN:
-                    paddleDirection = 480;
+                userPaddle.moveTowards(480);
                     break;
             }
 
@@ -157,7 +157,15 @@ public class PongGame extends JPanel implements KeyListener{
 
         @Override
         public void keyReleased(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                userPaddle.moveTowards();
+                    break;
             
+                case KeyEvent.VK_DOWN:
+                userPaddle.moveTowards();
+                    break;
+            }
         }
 
 }
