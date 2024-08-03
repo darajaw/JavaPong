@@ -10,8 +10,8 @@ public class PongGame extends JPanel implements KeyListener{
     private Ball gameBall;//pong ball declared
     private Paddle userPaddle, pcPaddle;//pong paddles declared
 
-    //Pong screen is 640X480 within the window
-    static final int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 480;
+    //Game panel is 640 X 480 within the frame
+    private static final int PANEL_WIDTH = 640, PANEL_HEIGHT = 480;
 
     //scores for players
     int userScore = 0; 
@@ -19,8 +19,11 @@ public class PongGame extends JPanel implements KeyListener{
 
     //count of ball bounces
     int bounceCount;
+    
+    //Controls movement of userPaddle
+    int mover;
 
-    //0 or WINDOW_HEIGHT for paddle movement
+    //0 or PANEL_HEIGHT for paddle movement
     int paddleDirection;
 
     //Constants set to keycode for up and down arrows
@@ -46,7 +49,7 @@ public class PongGame extends JPanel implements KeyListener{
 
         //draw the background, set color to BLACK and fill in a rectangle
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        g.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
 
         //draw the ball on the screen
         gameBall.paint(g);
@@ -71,10 +74,20 @@ public class PongGame extends JPanel implements KeyListener{
         gameBall.moveBall();
 
         //edge check/bounce
-        gameBall.borderBounce(0, WINDOW_HEIGHT);
+        gameBall.borderBounce(0, PANEL_HEIGHT);
 
-        //move user paddle towards where the mouse is
-        userPaddle.moveTowards();
+        //move User paddle based on input
+        switch (mover) {
+            case 1:
+                userPaddle.moveTowards(0);
+                break;
+            case 2:
+                userPaddle.moveTowards(PANEL_HEIGHT);
+                break;
+            default:
+                userPaddle.moveTowards();
+                break;
+        }
 
         //move PC paddle towards the ball y position
         pcPaddle.moveTowards(gameBall.getY());
@@ -86,7 +99,6 @@ public class PongGame extends JPanel implements KeyListener{
             
             //count bounces
             bounceCount++;
-            
         }
 
         //check if someone lost
@@ -95,7 +107,7 @@ public class PongGame extends JPanel implements KeyListener{
             userScore++;
             reset();
         }
-        else if(gameBall.getX() > WINDOW_WIDTH){
+        else if(gameBall.getX() > PANEL_WIDTH){
             //pc scores
             pcScore++;
             reset();
@@ -115,7 +127,7 @@ public class PongGame extends JPanel implements KeyListener{
     //reset game
     public void reset(){
 
-        //pause for a second before starting
+        //pause for a second before restarting
         try{
             Thread.sleep(1000);
         }
@@ -135,19 +147,19 @@ public class PongGame extends JPanel implements KeyListener{
     }
 
     
+    //methods for KeyListener
     @Override
         public void keyPressed(KeyEvent e){
-
+            
+            //Change paddle direction based on user input
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                userPaddle.moveTowards(0);
+                mover=1;
                     break;
-            
                 case KeyEvent.VK_DOWN:
-                userPaddle.moveTowards(480);
+                mover=2;
                     break;
             }
-
         }
 
         @Override
@@ -157,13 +169,15 @@ public class PongGame extends JPanel implements KeyListener{
 
         @Override
         public void keyReleased(KeyEvent e) {
+
+            //Stop moving User paddle if there is no input
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                userPaddle.moveTowards();
+                mover=0;
                     break;
             
                 case KeyEvent.VK_DOWN:
-                userPaddle.moveTowards();
+                mover=0;
                     break;
             }
         }
