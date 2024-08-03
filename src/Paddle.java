@@ -61,6 +61,10 @@ public class Paddle {
         }
     }
 
+    public void movement(){
+        
+    }
+
     public boolean checkCollision(Ball b){
 
         int rightX = x + PADDLE_WIDTH;
