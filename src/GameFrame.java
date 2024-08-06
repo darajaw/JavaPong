@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
 public class GameFrame extends JFrame{
@@ -26,7 +24,7 @@ public class GameFrame extends JFrame{
 
         //show the window
         this.setVisible(true);
-        
+
         //new Timer for refreshing frame by frame
         //16 millisecond delay = ~60fps
         Timer timer = new Timer(16, new ActionListener() {

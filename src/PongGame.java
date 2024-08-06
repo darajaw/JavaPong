@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
-public class PongGame extends JPanel implements KeyListener{
+public class PongGame extends JPanel{
     
     
     private Ball gameBall;//pong ball declared
@@ -21,7 +19,7 @@ public class PongGame extends JPanel implements KeyListener{
     int bounceCount;
     
     //Controls movement of userPaddle
-    int mover;
+    static int mover;
 
     //0 or PANEL_HEIGHT for paddle movement
     int paddleDirection;
@@ -33,15 +31,15 @@ public class PongGame extends JPanel implements KeyListener{
     //game constructor
     public PongGame(){
 
-        //Listen for key presses 
-        addKeyListener(this);
-        //focus key input on this method
-        setFocusable(true);
-
         //ball and paddle instances
         gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 10);
         pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
         userPaddle = new Paddle(610, 200, 75, 3, Color.RED);   
+
+        //Listen for key presses 
+        this.addKeyListener(new KeyInput());
+        //focus key input on this method
+        setFocusable(true);
     }
     
     //Updates and draws all the graphics on the screen     
@@ -151,41 +149,5 @@ public class PongGame extends JPanel implements KeyListener{
         gameBall.setSpeed(3);
         bounceCount = 0;
     }
-
-    
-    //methods for KeyListener
-    @Override
-        public void keyPressed(KeyEvent e){
-            
-            //Change paddle direction based on user input
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                mover=1;
-                    break;
-                case KeyEvent.VK_DOWN:
-                mover=2;
-                    break;
-            }
-        }
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            System.out.print(e.getKeyCode());
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-            //Stop moving User paddle if there is no input
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                mover=0;
-                    break;
-            
-                case KeyEvent.VK_DOWN:
-                mover=0;
-                    break;
-            }
-        }
 
 }
