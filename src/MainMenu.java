@@ -1,10 +1,18 @@
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Graphics;
+import javax.swing.JButton;
 
-public class MainMenu extends JFrame{
+public class MainMenu extends JPanel{
 
-    public MainMenu(JFrame frame){
+    public MainMenu(){
+    setOpaque(false);
 }
 
+public void paintComponent(Graphics g){
+
+    super.paintComponent(g);
+
+    g.drawString("MENU BOOOOOIII", 250, 250 );
+}
 
 }

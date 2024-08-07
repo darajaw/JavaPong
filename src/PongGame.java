@@ -39,11 +39,6 @@ public class PongGame extends JPanel{
         pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
         userPaddle = new Paddle(610, 200, 75, 3, Color.RED);   
 
-        //Listen for key presses 
-        this.addKeyListener(new KeyInput());
-        //focus key input on this method
-        setFocusable(true);
-
         //new Timer for refreshing frame by frame
         //16 millisecond delay = ~60fps
         Timer timer = new Timer(16, new ActionListener() {
@@ -56,7 +51,6 @@ public class PongGame extends JPanel{
 
                 //repaint the screen each frame
                 repaint();
-
                 
             }
         });
@@ -67,6 +61,9 @@ public class PongGame extends JPanel{
     
     //Updates and draws all the graphics on the screen     
     public void paintComponent(Graphics g){
+
+        //ensures the panel is cleared before redrawing
+        super.paintComponent(g);
 
         //draw the background, set color to BLACK and fill in a rectangle
         g.setColor(Color.WHITE);

@@ -6,6 +6,11 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput extends KeyAdapter {
 
+    private GameFrame gameFrame;
+
+    public KeyInput(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+    }
 
 	//methods for KeyListener
     @Override
@@ -20,7 +25,7 @@ public class KeyInput extends KeyAdapter {
                 PongGame.mover=2;
                     break;
                 case KeyEvent.VK_M:
-                GameFrame.pause = !GameFrame.pause;
+                gameFrame.toggleMenu();
                 break;
             }
         }
