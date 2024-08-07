@@ -20,7 +20,7 @@ public class KeyInput extends KeyAdapter {
                 PongGame.mover=2;
                     break;
                 case KeyEvent.VK_M:
-                System.out.println("Menu");
+                GameFrame.pause = !GameFrame.pause;
                 break;
             }
         }

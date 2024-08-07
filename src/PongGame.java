@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class PongGame extends JPanel{
@@ -28,6 +30,7 @@ public class PongGame extends JPanel{
     public static final int VK_UP = 38;
     public static final int VK_DOWN = 40;
 
+
     //game constructor
     public PongGame(){
 
@@ -40,6 +43,26 @@ public class PongGame extends JPanel{
         this.addKeyListener(new KeyInput());
         //focus key input on this method
         setFocusable(true);
+
+        //new Timer for refreshing frame by frame
+        //16 millisecond delay = ~60fps
+        Timer timer = new Timer(16, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //game logic
+                gameLogic();
+
+                //repaint the screen each frame
+                repaint();
+
+                
+            }
+        });
+
+        //start the timer after game is created
+        timer.start();
     }
     
     //Updates and draws all the graphics on the screen     

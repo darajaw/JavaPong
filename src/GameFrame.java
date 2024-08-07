@@ -8,7 +8,7 @@ public class GameFrame extends JFrame{
     //new PongGame instance
     PongGame game = new PongGame();
 
-    
+    static boolean pause = true;
 
     //constructor
     GameFrame(){
@@ -22,26 +22,9 @@ public class GameFrame extends JFrame{
         //add the game to the JFrame
         this.add(game);
 
-        //show the window
-        this.setVisible(true);
+        game.setVisible(true);
 
-        //new Timer for refreshing frame by frame
-        //16 millisecond delay = ~60fps
-        Timer timer = new Timer(16, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                //game logic
-                game.gameLogic();
-
-                //repaint the screen each frame
-                game.repaint();
-            }
-        });
-
-        //start the timer after game is created
-        timer.start();
+        
     }
 
     
