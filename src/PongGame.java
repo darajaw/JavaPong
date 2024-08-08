@@ -146,8 +146,6 @@ public class PongGame extends JPanel{
     }   
     
 
-    
-
     //reset game
     public void reset(){
 

@@ -10,10 +10,10 @@ public class GameFrame extends JFrame{
     
     //new PongGame instance
     PongGame game = new PongGame();
-    MainMenu menu = new MainMenu();
+    MainMenu menu = new MainMenu(this, game);
     JPanel contentPanel = new JPanel(new CardLayout());
 
-    static boolean gamepause = false;
+    static boolean gamepause = true;
 
     //constructor
     GameFrame(){

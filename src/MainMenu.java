@@ -19,7 +19,7 @@ public class MainMenu extends JPanel implements ActionListener{
     private int BUTTON_PANEL_x = (PongGame.PANEL_WIDTH - 200) / 2;
     private int BUTTON_PANEL_y = (PongGame.PANEL_HEIGHT - 150) / 2;
 
-    public MainMenu() {
+    public MainMenu(GameFrame gameFrame, PongGame pongGame) {
         //Set the layout manager of the MainMenu panel to null for absolute positioning
         this.setLayout(null);
 
@@ -27,20 +27,39 @@ public class MainMenu extends JPanel implements ActionListener{
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         
-        //Create buttons
-        JButton button1 = new JButton("Start Game");
-        JButton button2 = new JButton("Options");
-        JButton button3 = new JButton("Exit");
+        //Main menu buttons
+        JButton startButton = new JButton("Start Game");
+        JButton button2 = new JButton("Options");     
+        JButton exitButton = new JButton("Exit");
 
         //Set preferred sizes for the buttons
-        button1.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        startButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button2.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        button3.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        exitButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
         //Add buttons to the button panel
-        buttonPanel.add(button1);
+        buttonPanel.add(startButton);
         buttonPanel.add(button2);
-        buttonPanel.add(button3);
+        buttonPanel.add(exitButton);
+
+        //Button functions
+
+        startButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+                gameFrame.toggleMenu();
+                pongGame.reset();
+			}
+		});
+
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Quit the program
+				System.exit(0);
+			}
+		});
 
         //Position the button panel within the outer MainMenu panel
         buttonPanel.setBounds(BUTTON_PANEL_x, BUTTON_PANEL_y, BUTTON_WIDTH, BUTTON_PANEL_HEIGHT);
