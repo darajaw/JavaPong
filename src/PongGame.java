@@ -39,24 +39,6 @@ public class PongGame extends JPanel{
         pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
         userPaddle = new Paddle(610, 200, 75, 3, Color.RED);   
 
-        //new Timer for refreshing frame by frame
-        //16 millisecond delay = ~60fps
-        Timer timer = new Timer(16, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                //game logic
-                gameLogic();
-
-                //repaint the screen each frame
-                repaint();
-                
-            }
-        });
-
-        //start the timer after game is created
-        timer.start();
     }
     
     //Updates and draws all the graphics on the screen     

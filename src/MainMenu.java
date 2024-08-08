@@ -42,17 +42,17 @@ public class MainMenu extends JPanel implements ActionListener{
         buttonPanel.add(button2);
         buttonPanel.add(exitButton);
 
-        //Button functions
-
+        //Start button funciton
         startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
                 gameFrame.toggleMenu();
-                pongGame.reset();
+                gameFrame.toggleTimer();
 			}
 		});
 
+        //exit button function
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

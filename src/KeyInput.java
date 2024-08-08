@@ -26,6 +26,7 @@ public class KeyInput extends KeyAdapter {
                     break;
                 case KeyEvent.VK_M:
                 gameFrame.toggleMenu();
+                gameFrame.toggleTimer();
                 break;
             }
         }

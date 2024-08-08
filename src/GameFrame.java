@@ -13,7 +13,10 @@ public class GameFrame extends JFrame{
     MainMenu menu = new MainMenu(this, game);
     JPanel contentPanel = new JPanel(new CardLayout());
 
-    static boolean gamepause = true;
+    private Timer timer;
+
+    private boolean gamePause = true;
+    private boolean timerRunning = false;
 
     //constructor
     GameFrame(){
@@ -41,17 +44,42 @@ public class GameFrame extends JFrame{
         this.getRootPane().setOpaque(false);
         contentPanel.setOpaque(false);
 
+
+        //new Timer for refreshing frame by frame
+        //16 millisecond delay = ~60fps
+        timer = new Timer(16, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //game logic
+                game.gameLogic();
+
+                //repaint the screen each frame
+                game.repaint();
+                
+            }
+        });
+        
     }
 
+    public void toggleTimer(){
+        
+        if (timerRunning){this.timer.stop();}
+        else{this.timer.start();}
+
+        timerRunning = !timerRunning;
+
+    }
 
     public void toggleMenu() {
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         
-        if (gamepause){
+        if (gamePause){
         cardLayout.show(getContentPane(), "Game");}
         else{cardLayout.show(getContentPane(), "Menu");}
         
-        gamepause = !gamepause;
+        gamePause = !gamePause;
     }
     
     
