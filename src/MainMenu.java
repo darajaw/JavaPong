@@ -1,8 +1,4 @@
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -18,6 +14,10 @@ public class MainMenu extends JPanel implements ActionListener{
     private int BUTTON_PANEL_HEIGHT = 150; 
     private int BUTTON_PANEL_x = (PongGame.PANEL_WIDTH - 200) / 2;
     private int BUTTON_PANEL_y = (PongGame.PANEL_HEIGHT - 150) / 2;
+    private boolean gameStarted;
+
+    JButton startButton;
+    JButton exitButton;
 
     public MainMenu(GameFrame gameFrame, PongGame pongGame) {
         //Set the layout manager of the MainMenu panel to null for absolute positioning
@@ -28,9 +28,9 @@ public class MainMenu extends JPanel implements ActionListener{
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         
         //Main menu buttons
-        JButton startButton = new JButton("Start Game");
+        startButton = new JButton("Start Game");
         JButton button2 = new JButton("Options");     
-        JButton exitButton = new JButton("Exit");
+        exitButton = new JButton("Exit");
 
         //Set preferred sizes for the buttons
         startButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
@@ -46,9 +46,13 @@ public class MainMenu extends JPanel implements ActionListener{
         startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
                 gameFrame.toggleMenu();
                 gameFrame.toggleTimer();
+
+                //if game is not started, start game 
+                if(!gameStarted){startGame();}
+
 			}
 		});
 
@@ -56,8 +60,16 @@ public class MainMenu extends JPanel implements ActionListener{
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Quit the program
-				System.exit(0);
+
+                //if game has started, go back to main menu
+                if(gameStarted){
+                    stopGame(); 
+                    gameFrame.toggleMainMenu();
+                }
+
+                //If the game hasn't started, quit the program
+                else{System.exit(0);}
+				
 			}
 		});
 
@@ -75,6 +87,21 @@ public void paintComponent(Graphics g){
 
     super.paintComponent(g);
 
+}
+
+
+public void startGame() {
+    gameStarted = true;
+
+    startButton.setText("Resume Game"); 
+    exitButton.setText("Exit Game");
+}
+
+public void stopGame() {
+    gameStarted = false;
+    
+    startButton.setText("Start Game"); 
+    exitButton.setText("Exit");
 }
 
 @Override

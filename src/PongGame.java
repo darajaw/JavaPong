@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class PongGame extends JPanel{
-    
     
     private Ball gameBall;//pong ball declared
     private Paddle userPaddle, pcPaddle;//pong paddles declared
@@ -127,6 +124,7 @@ public class PongGame extends JPanel{
         }
     }   
     
+   
 
     //reset game
     public void reset(){

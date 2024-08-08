@@ -3,8 +3,6 @@
  * contaning the game
  */
 
-import java.awt.Frame;
-
 public class PongLauncher {
 
     public static void main(String[] args) {    

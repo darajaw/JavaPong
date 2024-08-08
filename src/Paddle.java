@@ -71,6 +71,7 @@ public class Paddle {
 
     public void moveTowards(){
 
+        //keeps the paddle in place if it's not set to move
         this.moveToY = y + height / 2;
 
     }

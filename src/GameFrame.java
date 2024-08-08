@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +18,7 @@ public class GameFrame extends JFrame{
     private boolean gamePause = true;
     private boolean timerRunning = false;
 
+    CardLayout cardLayout;
     //constructor
     GameFrame(){
 
@@ -32,6 +33,7 @@ public class GameFrame extends JFrame{
 
         setContentPane(contentPanel);
 
+        cardLayout = (CardLayout) getContentPane().getLayout();
         this.setVisible(true);
 
         //Listen for key presses 
@@ -70,11 +72,15 @@ public class GameFrame extends JFrame{
 
         timerRunning = !timerRunning;
 
+        
     }
 
+     //if game is paused resume and show game 
+     //if game is playing pause game and show menu
     public void toggleMenu() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         
+        menu.setOpaque(false);
+
         if (gamePause){
         cardLayout.show(getContentPane(), "Game");}
         else{cardLayout.show(getContentPane(), "Menu");}
@@ -82,7 +88,19 @@ public class GameFrame extends JFrame{
         gamePause = !gamePause;
     }
     
-    
+    public void toggleMainMenu() {
 
+        game.reset();
+        
+        //Make main menu background white
+        menu.setOpaque(true);
+        menu.setBackground(Color.WHITE);
+        menu.revalidate();
+        menu.repaint();
+
+        //Pull up main menu
+        cardLayout.show(getContentPane(), "Menu");        
+    }
+    
 }
 
