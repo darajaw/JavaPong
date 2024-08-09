@@ -87,10 +87,8 @@ public class GameFrame extends JFrame{
         
         gamePause = !gamePause;
     }
-    
-    public void toggleMainMenu() {
 
-        game.reset();
+    public void toggleMainMenu() {
         
         //Make main menu background white
         menu.setOpaque(true);

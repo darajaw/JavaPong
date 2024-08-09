@@ -27,6 +27,9 @@ public class PongGame extends JPanel{
     public static final int VK_UP = 38;
     public static final int VK_DOWN = 40;
 
+    //variable for game dark mode setting
+    //turned off by default
+    public boolean gameDark;
 
     //game constructor
     public PongGame(){
@@ -41,12 +44,13 @@ public class PongGame extends JPanel{
     //Updates and draws all the graphics on the screen     
     public void paintComponent(Graphics g){
 
+        
+
         //ensures the panel is cleared before redrawing
         super.paintComponent(g);
 
-        //draw the background, set color to BLACK and fill in a rectangle
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
+        if(gameDark){setBackground(Color.BLACK);}
+        else{setBackground(Color.WHITE);}
 
         //draw the ball on the screen
         gameBall.paint(g);
@@ -124,7 +128,9 @@ public class PongGame extends JPanel{
         }
     }   
     
-   
+   public void toggleDarkMode(){
+    gameDark = !gameDark;
+   }
 
     //reset game
     public void reset(){
