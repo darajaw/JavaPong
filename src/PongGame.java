@@ -37,20 +37,28 @@ public class PongGame extends JPanel{
         //ball and paddle instances
         gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 10);
         pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
-        userPaddle = new Paddle(610, 200, 75, 3, Color.RED);   
+        userPaddle = new Paddle(610, 200, 75, 3, Color.RED);
+
 
     }
     
     //Updates and draws all the graphics on the screen     
     public void paintComponent(Graphics g){
 
-        
-
         //ensures the panel is cleared before redrawing
         super.paintComponent(g);
 
-        if(gameDark){setBackground(Color.BLACK);}
-        else{setBackground(Color.WHITE);}
+        //if in dark mode make the background black and the score white
+        //if in light mode make the background white and the score black
+        if(gameDark){
+            setBackground(Color.BLACK);
+            g.setColor(Color.WHITE);           
+        }
+        else{setBackground(Color.WHITE);g.setColor(Color.BLACK);}
+
+        g.drawRect(0,0,PANEL_WIDTH,PANEL_HEIGHT); 
+        //the drawString method needs a String to print, and a location to print it at.
+        g.drawString("Score - User [ " + userScore + " ]   PC [ " + pcScore + " ]", 250, 20 );
 
         //draw the ball on the screen
         gameBall.paint(g);
@@ -59,10 +67,7 @@ public class PongGame extends JPanel{
         userPaddle.paint(g);
         pcPaddle.paint(g);
 
-        //update score
-        g.setColor(Color.BLACK);
-        //the drawString method needs a String to print, and a location to print it at.
-        g.drawString("Score - User [ " + userScore + " ]   PC [ " + pcScore + " ]", 250, 20 );
+        
 
     }
 
