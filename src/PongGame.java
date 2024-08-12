@@ -29,19 +29,22 @@ public class PongGame extends JPanel{
 
     //variable for game dark mode setting
     //turned off by default
-    public boolean gameDark;
+    private boolean gameDark;
 
     //game constructor
     public PongGame(){
 
         //ball and paddle instances
         gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 10);
-        pcPaddle = new Paddle(10, 200, 75, 3, Color.BLUE);
-        userPaddle = new Paddle(610, 200, 75, 3, Color.RED);
+        pcPaddle = new Paddle(10, 200, 3, Color.BLUE);
+        userPaddle = new Paddle(610, 200, 3, Color.RED);
 
 
     }
     
+    public boolean getGameDark(){
+        return gameDark;
+    }
     public int getMover() {
         return mover;
     }
@@ -63,8 +66,9 @@ public class PongGame extends JPanel{
             g.setColor(Color.WHITE);           
         }
         else{setBackground(Color.WHITE);g.setColor(Color.BLACK);}
-
-        g.drawRect(0,0,PANEL_WIDTH,PANEL_HEIGHT); 
+        
+        //draw border
+        g.drawRect(0,0,PANEL_WIDTH,PANEL_HEIGHT+1); 
         //the drawString method needs a String to print, and a location to print it at.
         g.drawString("Score - User [ " + userScore + " ]   PC [ " + pcScore + " ]", 250, 20 );
 

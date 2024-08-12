@@ -29,9 +29,12 @@ public class MainMenu extends JPanel implements ActionListener{
 
     private GameFrame gameFrame;
     private PongGame pongGame;
+    private MusicPlayer music = new MusicPlayer();
 
     public MainMenu(GameFrame gameFrame, PongGame pongGame) {
 
+        music.toggleBackgroundMusic();
+        
         this.gameFrame = gameFrame;
         this.pongGame = pongGame;
         
@@ -55,7 +58,7 @@ public class MainMenu extends JPanel implements ActionListener{
         exitButton = buttonMaker(exitButton, "Exit", menuButtons);
 
         modeButton = buttonMaker(modeButton, "Light Mode", subButtons);
-        muteButton = buttonMaker(muteButton, "Unmute",subButtons);
+        muteButton = buttonMaker(muteButton, "Mute",subButtons);
         subExit = buttonMaker(subExit, "Exit", subButtons);
 
         //Add the menu buttons to the menu panel
@@ -112,9 +115,9 @@ public class MainMenu extends JPanel implements ActionListener{
         modeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-                modeButton.setText(pongGame.gameDark?"Light Mode":"Dark Mode");
+                
                 pongGame.toggleDarkMode();
+                modeButton.setText(pongGame.getGameDark() ? "Dark Mode" : "Light Mode");
 
 			}
 		});
@@ -123,8 +126,8 @@ public class MainMenu extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-                //TODO add music and mute function
-                System.out.println("Functionality not yet implimented");
+                music.toggleBackgroundMusic();
+                muteButton.setText(music.getIsPlaying() ? "Mute" : "Unmute");
 			}
 		});
 

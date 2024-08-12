@@ -3,24 +3,23 @@ import java.awt.*; //needed for Color
 public class Paddle {
 
     //declare instance variables
-    private int height, x, y, speed, moveToY;
+    private int x, y, speed, moveToY;
     private Color color;
 
     //constant for paddle size
     static final int PADDLE_WIDTH = 15;
+    static final int PADDLE_HEIGHT = 75;
 
     /**
      * Paddle constructor
      * @param x the x position to start drawing the paddle
      * @param y the y position to start drawing the paddle
-     * @param height the paddle height
      * @param speed the amount the paddle may move per frame
      * @param color the paddle color
      */
-    public Paddle(int x, int y, int height, int speed, Color color) {
+    public Paddle(int x, int y, int speed, Color color) {
         this.x = x;
         this.y = y;
-        this.height = height;
         this.speed = speed;
         this.color = color;
     }  
@@ -66,13 +65,13 @@ public class Paddle {
         borderCheck();
 
         //draw the paddle 
-        g.drawRect(x, y, PADDLE_WIDTH, height);
+        g.drawRect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
     }
 
     public void moveTowards(){
 
         //keeps the paddle in place if it's not set to move
-        this.moveToY = y + height / 2;
+        this.moveToY = y + PADDLE_HEIGHT / 2;
 
     }
     
@@ -82,7 +81,7 @@ public class Paddle {
 
         //find the location of the center of the paddle
         //x,y of paddle is the top left corner
-        int centerY = y + height / 2;
+        int centerY = y + PADDLE_HEIGHT / 2;
         
         //determine if we need to move more than the speed away from where we are now
         //checks if the paddle is off center from the target but within the speed parameters
@@ -107,7 +106,7 @@ public class Paddle {
     public boolean checkCollision(Ball b){
 
         int rightX = x + PADDLE_WIDTH;
-        int bottomY = y + height;
+        int bottomY = y + PADDLE_HEIGHT;
     
         //check if the Ball is between the x values of the paddle
         if(b.getX() > (x - b.getSize()) && b.getX() < rightX){
@@ -127,6 +126,6 @@ public class Paddle {
         
         //keep paddle from leaving the window
         if (y <= 0){ this.y = 0;}
-        if (y + height >= PongGame.PANEL_HEIGHT){this.y = PongGame.PANEL_HEIGHT - height;}
+        if (y + PADDLE_HEIGHT >= PongGame.PANEL_HEIGHT){this.y = PongGame.PANEL_HEIGHT - PADDLE_HEIGHT;}
     }
 }

@@ -11,6 +11,7 @@ public class GameFrame extends JFrame{
     //new PongGame instance
     PongGame game = new PongGame();
     MainMenu menu = new MainMenu(this, game);
+    
     JPanel contentPanel = new JPanel(new CardLayout());
 
     private Timer timer;
@@ -19,9 +20,12 @@ public class GameFrame extends JFrame{
     private boolean timerRunning = false;
 
     CardLayout cardLayout;
+
+    
     //constructor
     GameFrame(){
 
+        
         //exit program when window is closed
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
