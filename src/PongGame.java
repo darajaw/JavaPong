@@ -18,7 +18,7 @@ public class PongGame extends JPanel{
     int bounceCount;
     
     //Controls movement of userPaddle
-    static int mover;
+    private int mover;
 
     //0 or PANEL_HEIGHT for paddle movement
     int paddleDirection;
@@ -40,6 +40,14 @@ public class PongGame extends JPanel{
         userPaddle = new Paddle(610, 200, 75, 3, Color.RED);
 
 
+    }
+    
+    public int getMover() {
+        return mover;
+    }
+
+    public void setMover(int mover) {
+        this.mover = mover;
     }
     
     //Updates and draws all the graphics on the screen     

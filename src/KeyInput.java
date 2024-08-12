@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter {
 
     private GameFrame gameFrame;
+    private PongGame pongGame;
 
-    public KeyInput(GameFrame gameFrame) {
+    public KeyInput(GameFrame gameFrame, PongGame pongGame) {
         this.gameFrame = gameFrame;
+        this.pongGame = pongGame;
     }
 
 	//methods for KeyListener
@@ -19,10 +21,10 @@ public class KeyInput extends KeyAdapter {
             //Change paddle direction based on user input
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                PongGame.mover=1;
+                pongGame.setMover(1);
                     break;
                 case KeyEvent.VK_DOWN:
-                PongGame.mover=2;
+                pongGame.setMover(2);
                     break;
                 case KeyEvent.VK_M:
                 gameFrame.toggleMenu();
@@ -41,11 +43,11 @@ public class KeyInput extends KeyAdapter {
             //Stop moving User paddle if there is no input
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                PongGame.mover=0;
+                pongGame.setMover(0);
                     break;
             
                 case KeyEvent.VK_DOWN:
-                PongGame.mover=0;
+                pongGame.setMover(0);
                     break;
             }
         }

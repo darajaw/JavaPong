@@ -39,28 +39,37 @@ public class MainMenu extends JPanel implements ActionListener{
         this.setLayout(null);
 
         //Create an inner panel with BoxLayout to arrange buttons
+        //Position th button panel in the center of the screen
         menuButtons = new JPanel();
         menuButtons.setLayout(new BoxLayout(menuButtons, BoxLayout.Y_AXIS));
+        menuButtons.setBounds(BUTTON_PANEL_x, BUTTON_PANEL_y, BUTTON_WIDTH, BUTTON_PANEL_HEIGHT);   
 
-        //Position the button panel within the outer MainMenu panel
-        menuButtons.setBounds(BUTTON_PANEL_x, BUTTON_PANEL_y, BUTTON_WIDTH, BUTTON_PANEL_HEIGHT);       
-        
-        //Main menu buttons
-        startButton = new JButton("Start Game");
-        optionButton = new JButton("Options");     
-        exitButton = new JButton("Exit"); 
+        //Do the same for the submenu buttons
+        subButtons = new JPanel();
+        subButtons.setLayout(new BoxLayout(subButtons, BoxLayout.Y_AXIS));
+        subButtons.setBounds(BUTTON_PANEL_x, BUTTON_PANEL_y, BUTTON_WIDTH, BUTTON_PANEL_HEIGHT);
 
-        //Set preferred sizes for the buttons
-        startButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        optionButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        exitButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        //Add the various buttons to each panel
+        startButton = buttonMaker(startButton, "Start Game", menuButtons);
+        optionButton = buttonMaker(optionButton, "Options", menuButtons);
+        exitButton = buttonMaker(exitButton, "Exit", menuButtons);
 
-        //Add buttons to the button panel
-        menuButtons.add(startButton);
-        menuButtons.add(optionButton);
-        menuButtons.add(exitButton);
+        modeButton = buttonMaker(modeButton, "Light Mode", subButtons);
+        muteButton = buttonMaker(muteButton, "Unmute",subButtons);
+        subExit = buttonMaker(subExit, "Exit", subButtons);
 
-        //Start button funciton
+        //Add the menu buttons to the menu panel
+        this.add(menuButtons);
+
+        //Add the submenu buttons to the menu but keep them hidden by default
+        this.add(subButtons);
+        subButtons.setVisible(false);
+
+        //Make main menu background transparent
+        this.setOpaque(false);
+
+
+        //Action listeners for button functions
         startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -84,7 +93,6 @@ public class MainMenu extends JPanel implements ActionListener{
             }
         });
         
-        //exit button function
 		exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -101,24 +109,6 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 		});
 
-        subButtons = new JPanel();
-        subButtons.setLayout(new BoxLayout(subButtons, BoxLayout.Y_AXIS));
-        subButtons.setBounds(BUTTON_PANEL_x, BUTTON_PANEL_y, BUTTON_WIDTH, BUTTON_PANEL_HEIGHT);  
-
-        //submenu buttons
-        modeButton = new JButton("Light Mode");
-        muteButton = new JButton("Unmute");        
-        subExit = new JButton("Exit");
-
-        modeButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        muteButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        subExit.setMaximumSize(new Dimension(BUTTON_WIDTH,BUTTON_HEIGHT));
-
-        subButtons.add(modeButton);
-        subButtons.add(muteButton);
-        subButtons.add(subExit);
-
-        //Start button funciton
         modeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,7 +119,15 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 		});
 
-        //exit button function
+        muteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+                //TODO add music and mute function
+                System.out.println("Functionality not yet implimented");
+			}
+		});
+
 		subExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -145,14 +143,6 @@ public class MainMenu extends JPanel implements ActionListener{
                 }
 			}
 		});
-
-        this.add(subButtons);
-        subButtons.setVisible(false);
-        //Add the button panel to the MainMenu panel
-        this.add(menuButtons);
-
-        //Make main menu background transparent
-        this.setOpaque(false);
     }
 
     public void paintComponent(Graphics g){
@@ -197,5 +187,20 @@ public class MainMenu extends JPanel implements ActionListener{
             menuButtons.setVisible(true);
             subButtons.setVisible(false);
         }
+    }
+
+    //A method to streamline the process of making buttons and adding them to JPanels
+    private JButton buttonMaker(JButton button, String text, JPanel buttonPanel){
+
+        //Button made with text
+        button = new JButton(text);
+
+        //Button dimensions set
+        button.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        //Button added to target JPanel
+        buttonPanel.add(button);
+
+        return button;
     }
 }

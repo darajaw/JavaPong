@@ -28,16 +28,17 @@ public class GameFrame extends JFrame{
         //the size of the game is 480x640, the size of the JFrame needs to be slightly larger
         this.setSize(650,495);
 
+        //Game and menu panels added to the content panel to be used in a cardlayout 
         contentPanel.add(menu, "Menu");
         contentPanel.add(game, "Game");
-
+        
         setContentPane(contentPanel);
 
         cardLayout = (CardLayout) getContentPane().getLayout();
         this.setVisible(true);
 
         //Listen for key presses 
-        this.addKeyListener(new KeyInput(this));
+        this.addKeyListener(new KeyInput(this,game));
         //focus key input on this method
         this.setFocusable(true);
 
@@ -70,9 +71,7 @@ public class GameFrame extends JFrame{
         if (timerRunning){this.timer.stop();}
         else{this.timer.start();}
 
-        timerRunning = !timerRunning;
-
-        
+        timerRunning = !timerRunning;        
     }
 
      //if game is paused resume and show game 
