@@ -65,7 +65,7 @@ public class Paddle {
         borderCheck();
 
         //draw the paddle 
-        g.drawRect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
+        g.fillRect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
     }
 
     public void moveTowards(){
@@ -99,10 +99,6 @@ public class Paddle {
         }
     }
 
-    public void movement(){
-
-    }
-
     public boolean checkCollision(Ball b){
 
         int rightX = x + PADDLE_WIDTH;
@@ -112,12 +108,12 @@ public class Paddle {
         if(b.getX() > (x - b.getSize()) && b.getX() < rightX){
             //check if Ball is between the y values of the paddle
             if(b.getY() > y && b.getY() < bottomY){
-                //if we get here, we know the ball and the paddle have collided
+                //The ball and the paddle have collided
                 return true;
             }
         }
     
-        //if we get here, one of the checks failed, and the ball has not collided
+        //One of the checks failed, and the ball has not collided
         return false;
     
     }

@@ -1,4 +1,6 @@
 import javax.swing.JPanel;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -31,13 +33,17 @@ public class MainMenu extends JPanel implements ActionListener{
     private PongGame pongGame;
     private MusicPlayer music = new MusicPlayer();
 
-    public MainMenu(GameFrame gameFrame, PongGame pongGame) {
+    private Ball gameBall;//pong ball declared
+    private Paddle userPaddle, pcPaddle;//pong paddles declared
 
-        music.toggleBackgroundMusic();
-        
+    public MainMenu(GameFrame gameFrame, PongGame pongGame) {
         this.gameFrame = gameFrame;
         this.pongGame = pongGame;
+
+        music.toggleBackgroundMusic();        
         
+        this.setBackground(pongGame.isGameDark() ? Color.BLACK : Color.WHITE);
+
         //Set the layout manager of the MainMenu panel to null for absolute positioning
         this.setLayout(null);
 
@@ -57,7 +63,7 @@ public class MainMenu extends JPanel implements ActionListener{
         optionButton = buttonMaker(optionButton, "Options", menuButtons);
         exitButton = buttonMaker(exitButton, "Exit", menuButtons);
 
-        modeButton = buttonMaker(modeButton, "Light Mode", subButtons);
+        modeButton = buttonMaker(modeButton, "Dark Mode", subButtons);
         muteButton = buttonMaker(muteButton, "Mute",subButtons);
         subExit = buttonMaker(subExit, "Exit", subButtons);
 
@@ -67,10 +73,6 @@ public class MainMenu extends JPanel implements ActionListener{
         //Add the submenu buttons to the menu but keep them hidden by default
         this.add(subButtons);
         subButtons.setVisible(false);
-
-        //Make main menu background transparent
-        this.setOpaque(false);
-
 
         //Action listeners for button functions
         startButton.addActionListener(new ActionListener() {
@@ -116,8 +118,8 @@ public class MainMenu extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 
-                pongGame.toggleDarkMode();
-                modeButton.setText(pongGame.getGameDark() ? "Dark Mode" : "Light Mode");
+                gameFrame.toggleDarkMode();
+                modeButton.setText(pongGame.isGameDark() ? "Dark Mode" : "Light Mode");
 
 			}
 		});
@@ -149,8 +151,28 @@ public class MainMenu extends JPanel implements ActionListener{
     }
 
     public void paintComponent(Graphics g){
+            gameBall = pongGame.getGameBall();
+            userPaddle = pongGame.getUserPaddle();
+            pcPaddle = pongGame.getPCPaddle();
 
-        super.paintComponent(g);
+            //ensures the panel is cleared before redrawing
+            super.paintComponent(g);
+        
+            if(gameStarted){
+            //set score color based on background
+            g.setColor(pongGame.isGameDark() ? Color.WHITE : Color.BLACK);
+            //draw the scores
+            g.drawString("Score - User [ " + pongGame.getUserScore() + " ]   PC [ " + pongGame.getPCScore() + " ]", 250, 20 );
+
+            //draw the ball on the screen
+            gameBall.paint(g);
+    
+            //draw the paddles
+            userPaddle.paint(g);
+            pcPaddle.paint(g);
+
+            
+            }
 
     }
 

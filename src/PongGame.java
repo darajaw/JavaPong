@@ -11,17 +11,17 @@ public class PongGame extends JPanel{
     static final int PANEL_WIDTH = 640, PANEL_HEIGHT = 480;
 
     //scores for players
-    int userScore = 0; 
-    int pcScore = 0;
+    private int userScore = 0; 
+    private int pcScore = 0;
 
     //count of ball bounces
-    int bounceCount;
+    private int bounceCount;
     
     //Controls movement of userPaddle
     private int mover;
 
     //0 or PANEL_HEIGHT for paddle movement
-    int paddleDirection;
+    private int paddleDirection;
 
     //Constants set to keycode for up and down arrows
     public static final int VK_UP = 38;
@@ -29,30 +29,117 @@ public class PongGame extends JPanel{
 
     //variable for game dark mode setting
     //turned off by default
-    private boolean gameDark;
+    private boolean gameDark = true;
 
     //game constructor
     public PongGame(){
 
         //ball and paddle instances
-        gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 10);
+        gameBall = new Ball(300, 200, -3, 3, 3, Color.PINK, 15);
         pcPaddle = new Paddle(10, 200, 3, Color.BLUE);
         userPaddle = new Paddle(610, 200, 3, Color.RED);
 
 
     }
     
-    public boolean getGameDark(){
-        return gameDark;
+    
+
+    public Ball getGameBall() {
+        return gameBall;
     }
+
+
+
+    public void setGameBall(Ball gameBall) {
+        this.gameBall = gameBall;
+    }
+
+
+
+    public Paddle getUserPaddle() {
+        return userPaddle;
+    }
+
+
+
+    public void setUserPaddle(Paddle userPaddle) {
+        this.userPaddle = userPaddle;
+    }
+
+
+
+    public Paddle getPCPaddle() {
+        return pcPaddle;
+    }
+
+
+
+    public void setPCPaddle(Paddle pcPaddle) {
+        this.pcPaddle = pcPaddle;
+    }
+
+
+
+    public static int getPanelWidth() {
+        return PANEL_WIDTH;
+    }
+
+
+
+    public static int getPanelHeight() {
+        return PANEL_HEIGHT;
+    }
+
+
+
+    public int getUserScore() {
+        return userScore;
+    }
+
+
+
+    public void setUserScore(int userScore) {
+        this.userScore = userScore;
+    }
+
+
+
+    public int getPCScore() {
+        return pcScore;
+    }
+
+
+
+    public void setPCScore(int pcScore) {
+        this.pcScore = pcScore;
+    }
+
+
+
     public int getMover() {
         return mover;
     }
 
+
+
     public void setMover(int mover) {
         this.mover = mover;
     }
-    
+
+
+
+    public boolean isGameDark() {
+        return gameDark;
+    }
+
+
+
+    public void setGameDark(boolean gameDark) {
+        this.gameDark = gameDark;
+    }
+
+
+
     //Updates and draws all the graphics on the screen     
     public void paintComponent(Graphics g){
 
@@ -63,9 +150,12 @@ public class PongGame extends JPanel{
         //if in light mode make the background white and the score black
         if(gameDark){
             setBackground(Color.BLACK);
-            g.setColor(Color.WHITE);           
+            g.setColor(Color.WHITE);         
         }
-        else{setBackground(Color.WHITE);g.setColor(Color.BLACK);}
+        else{
+            setBackground(Color.WHITE);
+            g.setColor(Color.BLACK);
+        }
         
         //draw border
         g.drawRect(0,0,PANEL_WIDTH,PANEL_HEIGHT+1); 
@@ -119,8 +209,9 @@ public class PongGame extends JPanel{
             //nudge ball in correct direction to avoid paddle collision bug
             //if ball cx is positive (moving right) move it just outside the pcPaddle
             //if ball cx is negative (moving leftt) move it just outside the userPaddle
-            gameBall.setX(gameBall.getCx() > 0 ? (pcPaddle.getX() + Paddle.PADDLE_WIDTH + 1) : (userPaddle.getX() - 10));
+            gameBall.setX((gameBall.getCx() > 0) ? (pcPaddle.getX() + Paddle.PADDLE_WIDTH + 1) : (userPaddle.getX() - gameBall.getSize()));
             
+
             //count bounces
             bounceCount++;
         }
@@ -144,10 +235,6 @@ public class PongGame extends JPanel{
             gameBall.increaseSpeed();
         }
     }   
-    
-   public void toggleDarkMode(){
-    gameDark = !gameDark;
-   }
 
     //reset game
     public void reset(){

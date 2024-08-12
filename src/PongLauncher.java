@@ -5,11 +5,7 @@
 
 public class PongLauncher {
 
-    public static void main(String[] args) {    
-        
-    GameFrame pong = new GameFrame(); 
-
-    pong.setVisible(true);
-        
+    public static void main(String[] args) {      
+        new GameFrame();   
     }
 }

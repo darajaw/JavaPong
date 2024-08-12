@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame{
     
+    static final int FRAME_WIDTH = 655;
+    static final int FRAME_HEIGHT = 519;
     //new PongGame instance
     PongGame game = new PongGame();
     MainMenu menu = new MainMenu(this, game);
@@ -30,7 +32,7 @@ public class GameFrame extends JFrame{
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //the size of the game is 480x640, the size of the JFrame needs to be slightly larger
-        this.setSize(650,495);
+        this.setSize(FRAME_WIDTH,FRAME_HEIGHT);
 
         //Game and menu panels added to the content panel to be used in a cardlayout 
         contentPanel.add(menu, "Menu");
@@ -45,12 +47,6 @@ public class GameFrame extends JFrame{
         this.addKeyListener(new KeyInput(this,game));
         //focus key input on this method
         this.setFocusable(true);
-
-        //Make the rootPane and contentPane transparent
-        //Allows the game to be visible behind the menu
-        this.getRootPane().setOpaque(false);
-        contentPanel.setOpaque(false);
-
 
         //new Timer for refreshing frame by frame
         //16 millisecond delay = ~60fps
@@ -81,8 +77,6 @@ public class GameFrame extends JFrame{
      //if game is paused resume and show game 
      //if game is playing pause game and show menu
     public void toggleMenu() {
-        
-        menu.setOpaque(false);
 
         if (gamePause){
         cardLayout.show(getContentPane(), "Game");}
@@ -92,16 +86,24 @@ public class GameFrame extends JFrame{
     }
 
     public void toggleMainMenu() {
-        
-        //Make main menu background white
-        menu.setOpaque(true);
-        menu.setBackground(Color.WHITE);
+        menu.setBackground(game.isGameDark()?Color.BLACK:Color.WHITE);
         menu.revalidate();
         menu.repaint();
 
         //Pull up main menu
         cardLayout.show(getContentPane(), "Menu");        
     }
-    
-}
 
+    public void toggleDarkMode() {
+        
+        game.setGameDark(!game.isGameDark());
+        
+        menu.setBackground(game.isGameDark()?Color.BLACK:Color.WHITE);
+        menu.revalidate();
+        menu.repaint();
+
+        //Pull up main menu
+        cardLayout.show(getContentPane(), "Menu");        
+    }
+
+}
