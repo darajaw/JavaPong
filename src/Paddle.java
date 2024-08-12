@@ -3,7 +3,7 @@ import java.awt.*; //needed for Color
 public class Paddle {
 
     //declare instance variables
-    private int x, y, speed, moveToY;
+    private int x, y, speed;
     private Color color;
 
     //constant for paddle size
@@ -71,13 +71,12 @@ public class Paddle {
     public void moveTowards(){
 
         //keeps the paddle in place if it's not set to move
-        this.moveToY = y + PADDLE_HEIGHT / 2;
+        moveTowards(y + PADDLE_HEIGHT / 2);
 
     }
     
     //paddle movement method
     public void moveTowards(int moveToY) {
-        
 
         //find the location of the center of the paddle
         //x,y of paddle is the top left corner

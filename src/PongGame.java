@@ -19,10 +19,7 @@ public class PongGame extends JPanel{
     
     //Controls movement of userPaddle
     private int mover;
-
-    //0 or PANEL_HEIGHT for paddle movement
-    private int paddleDirection;
-
+    
     //Constants set to keycode for up and down arrows
     public static final int VK_UP = 38;
     public static final int VK_DOWN = 40;

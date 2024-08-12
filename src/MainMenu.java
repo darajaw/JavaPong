@@ -29,7 +29,7 @@ public class MainMenu extends JPanel implements ActionListener{
     JButton modeButton;
     JButton muteButton;
 
-    private GameFrame gameFrame;
+    
     private PongGame pongGame;
     private MusicPlayer music = new MusicPlayer();
 
@@ -37,7 +37,6 @@ public class MainMenu extends JPanel implements ActionListener{
     private Paddle userPaddle, pcPaddle;//pong paddles declared
 
     public MainMenu(GameFrame gameFrame, PongGame pongGame) {
-        this.gameFrame = gameFrame;
         this.pongGame = pongGame;
 
         music.toggleBackgroundMusic();        

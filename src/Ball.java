@@ -2,12 +2,20 @@ import java.awt.*;
 
 public class Ball {
 
-	//x & y are coordinates, cx & cy are changes in x & y per frame
     private int x, y, cx, cy, speed, size;
     private Color color;
     static final int MAX_SPEED = 7;
 
-	//ball constructor
+	/**
+     * Ball constructor
+     * @param x the x position to start drawing the ball
+     * @param y the y position to start drawing the ball
+     * @param cx the vector of the ball's x movement
+     * @param cy the vector of the ball's y movement
+     * @param speed the amount the ball may move per frame
+     * @param color the ball color
+     * @param size the size of the ball  
+     */
     public Ball(int x, int y, int cx, int cy, int speed, Color color, int size) {
         this.x = x;
         this.y = y;
