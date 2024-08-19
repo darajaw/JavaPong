@@ -1,8 +1,12 @@
 import javax.swing.JPanel;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -156,12 +160,25 @@ public class MainMenu extends JPanel implements ActionListener{
 
             //ensures the panel is cleared before redrawing
             super.paintComponent(g);
+            
+            // Cast Graphics to Graphics2D for more advanced drawing
+            Graphics2D g2d = (Graphics2D) g;
         
             if(gameStarted){
             //set score color based on background
             g.setColor(pongGame.isGameDark() ? Color.WHITE : Color.BLACK);
-            //draw the scores
-            g.drawString("Score - User [ " + pongGame.getUserScore() + " ]   PC [ " + pongGame.getPCScore() + " ]", 250, 20 );
+            // Draw the dashed line down the center
+            Stroke originalStroke = g2d.getStroke();
+            g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{10}, 0));
+            g2d.drawLine(PongGame.getPanelWidth() / 2, 4, PongGame.getPanelWidth() / 2, PongGame.getPanelHeight());
+            g2d.setStroke(originalStroke);
+
+            // Draw scores with large numbers
+            g.setFont(new Font("Arial", Font.BOLD, 50)); // Set the font size to 50
+            g.drawString(String.valueOf(pongGame.getPCScore()), PongGame.getPanelWidth() / 4 - g.getFontMetrics().stringWidth(String.valueOf(pongGame.getPCScore())) / 2, PongGame.getPanelHeight() / 2);
+            g.drawString(String.valueOf(pongGame.getUserScore()), 3 * PongGame.getPanelWidth() / 4 - g.getFontMetrics().stringWidth(String.valueOf(pongGame.getUserScore())) / 2, PongGame.getPanelHeight() / 2);
+
+
 
             //draw the ball on the screen
             gameBall.paint(g);

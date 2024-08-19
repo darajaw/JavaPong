@@ -26,7 +26,7 @@ public class KeyInput extends KeyAdapter {
                 case KeyEvent.VK_DOWN:
                 pongGame.setMover(2);
                     break;
-                case KeyEvent.VK_M:
+                case KeyEvent.VK_P:
                 gameFrame.toggleMenu();
                 gameFrame.toggleTimer();
                 break;
