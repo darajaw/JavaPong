@@ -1,3 +1,8 @@
+/*
+ * Class: MainMenu
+ * Purpose: Object class for the game menus
+ * 
+ */
 import javax.swing.JPanel;
 
 import java.awt.BasicStroke;
@@ -153,6 +158,10 @@ public class MainMenu extends JPanel implements ActionListener{
 		});
     }
 
+    /**
+     * Repaints the menu with game components in the background
+     * @param g the graphics object to draw the game
+     */
     public void paintComponent(Graphics g){
             gameBall = pongGame.getGameBall();
             userPaddle = pongGame.getUserPaddle();
@@ -192,7 +201,9 @@ public class MainMenu extends JPanel implements ActionListener{
 
     }
 
-
+    /**
+     * Starts the game and changes the button text
+     */
     public void startGame() {
         gameStarted = true;
 
@@ -200,6 +211,9 @@ public class MainMenu extends JPanel implements ActionListener{
         exitButton.setText("Exit Game");
     }
 
+    /**
+     * Stops the game and resets the game components
+     */
     public void stopGame() {
         pongGame.reset();
         gameStarted = false;
@@ -214,7 +228,9 @@ public class MainMenu extends JPanel implements ActionListener{
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
-
+    /**
+     * Toggles the submenu visibility
+     */
     private void toggleSubMenu(){
 
         subMenu = !subMenu;
@@ -230,7 +246,13 @@ public class MainMenu extends JPanel implements ActionListener{
         }
     }
 
-    //A method to streamline the process of making buttons and adding them to JPanels
+    /**
+     * Creates a button with the specified text and adds it to the specified JPanel
+     * @param button button to be created
+     * @param text text to be displayed on the button
+     * @param buttonPanel JPanel to add the button to
+     * @return the created button
+     */
     private JButton buttonMaker(JButton button, String text, JPanel buttonPanel){
 
         //Button made with text

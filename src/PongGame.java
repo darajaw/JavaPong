@@ -1,7 +1,10 @@
+/*
+ * Class: PongGame
+ * Purpose: Contains the game logic and graphics for the pong game
+ */
+
 import javax.swing.*;
 import java.awt.*;
-
-
 
 public class PongGame extends JPanel{
     
@@ -135,10 +138,11 @@ public class PongGame extends JPanel{
     public void setGameDark(boolean gameDark) {
         this.gameDark = gameDark;
     }
-
-
-
-    //Updates and draws all the graphics on the screen     
+ 
+    /**
+     * Updates and draws all the graphics on the screen     * 
+     * @param g the graphics object to draw the game
+     */  
     public void paintComponent(Graphics g){
 
         //ensures the panel is cleared before redrawing
@@ -188,7 +192,9 @@ public class PongGame extends JPanel{
     }
 
     
-    //Called once per frame to handle essential game operations
+    /**
+     *  Called once per frame to handle essential game operations
+     */
     public void gameLogic(){
         
 
@@ -250,7 +256,9 @@ public class PongGame extends JPanel{
         }
     }   
 
-    //reset game
+    /**
+     * reset game
+    */
     public void reset(){
 
         //pause for a second before restarting
@@ -263,7 +271,7 @@ public class PongGame extends JPanel{
             e.printStackTrace();
         }
 
-        //reset game
+        //reset object positions
         gameBall.setX(300);
         gameBall.setY(200);
         gameBall.setCx(-3);

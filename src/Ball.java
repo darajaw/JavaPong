@@ -1,3 +1,7 @@
+/*
+ * Class: Ball
+ * Purpose: Object class for the ball in the game
+ */
 import java.awt.*;
 
 public class Ball {

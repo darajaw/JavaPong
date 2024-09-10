@@ -1,6 +1,5 @@
 /* Class: PongLauncher
- * Main class which launches the window
- * contaning the game
+ * Purpose: Main class which launches the window contaning the game
  */
 
 public class PongLauncher {

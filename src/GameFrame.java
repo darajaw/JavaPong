@@ -1,3 +1,8 @@
+/*
+ * Class: GameFrame
+ * Purpose: Main JFrame containing the game and timer
+ */
+
 import javax.swing.*;
 
 import java.awt.CardLayout;
@@ -66,6 +71,9 @@ public class GameFrame extends JFrame{
         
     }
 
+    /**
+     * Toggles the timer on and off for the game
+     */
     public void toggleTimer(){
         
         if (timerRunning){this.timer.stop();}
@@ -74,8 +82,9 @@ public class GameFrame extends JFrame{
         timerRunning = !timerRunning;        
     }
 
-     //if game is paused resume and show game 
-     //if game is playing pause game and show menu
+     /**
+      * Switches between menu and game content panes
+      */
     public void toggleMenu() {
 
         if (gamePause){
@@ -85,6 +94,9 @@ public class GameFrame extends JFrame{
         gamePause = !gamePause;
     }
 
+    /**
+     * Redraws the main menu with the updated dark or light mode
+     */
     public void toggleMainMenu() {
         menu.setBackground(game.isGameDark()?Color.BLACK:Color.WHITE);
         menu.revalidate();
@@ -94,6 +106,9 @@ public class GameFrame extends JFrame{
         cardLayout.show(getContentPane(), "Menu");        
     }
 
+    /**
+     * Redraws game with the updated dark or light mode
+     */
     public void toggleDarkMode() {
         
         game.setGameDark(!game.isGameDark());

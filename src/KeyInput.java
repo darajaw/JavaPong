@@ -1,9 +1,12 @@
+/*
+ * Class: KeyInput
+ * Purpose: process key input from the keyboard
+ */
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-/*
- * process key input from the keyboard
- */
+//process key input from the keyboard
 public class KeyInput extends KeyAdapter {
 
     private GameFrame gameFrame;

@@ -1,3 +1,7 @@
+/*
+ * Class: MusicPlayer
+ * Purpose: Plays background music for the game
+ */
 import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -30,7 +34,9 @@ public class MusicPlayer {
         return isPlaying;
     }
 
-    //Turn backgorund music on and off
+    /**
+     *  Turn backgorund music on and off
+     */
     public void toggleBackgroundMusic() {
         
         if (!isPlaying) {
@@ -42,7 +48,10 @@ public class MusicPlayer {
         isPlaying = !isPlaying;
     }
 
-    public void toggleCollisionSound() {
+    /**
+     *  Triggers collision sound when called
+     */
+    public void triggerCollisionSound() {
         //TODO add collision sound
     }
 }
